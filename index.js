@@ -12,7 +12,7 @@ const client = new Discord.Client({
 
 
 client.on("ready", () => {
-    console.log(`Connected as ${client.user.tag}`);
+    console.log(`Conectado como ${client.user.tag}`);
 });
 
 client.setups = new Enmap({
@@ -33,30 +33,30 @@ client.on("messageCreate", async message => {
     console.log(client.setups.get(message.guild.id))
 
     if(command == "ping"){
-        return message.reply(`The Bot's Ping is \`${client.ws.ping}ms\``)
+        return message.reply(`El ping del bot es \`${client.ws.ping}ms\``)
     }
 
     if(command == "setup-membercount" || command == "setup-serverstats" || command == "setup-membercounter"){
-        if(!args.length || !["total", "humans", "bots"].includes(args[0])) return message.reply(`Please select what method do you want to use!\nMethods: \`total\`, \`humans\`, \`bots\``);
+        if(!args.length || !["total", "humans", "bots"].includes(args[0])) return message.reply(`Por favor, seleccione qué método desea usar!\nMethods: \`total\`, \`humans\`, \`bots\``);
         if(args[0] == "total"){
             let channel = message.guild.channels.cache.get(args[1]);
-            if(!channel) return message.reply(`The Channel you specified doesn't exist in this Server!`);
+            if(!channel) return message.reply(`El canal que especificó no existe en este servidor!`);
             client.setups.set(message.guild.id, channel.id, "total");
-            return message.reply(`✅ Succesfully set the **Total** Member Count to <#${channel.id}>`)
+            return message.reply(`✅ Configure con éxito el ** TOTAL ** Cuenta de miembros para <#${channel.id}>`)
         }
 
         if(args[0] == "humans"){
             let channel = message.guild.channels.cache.get(args[1]);
             if(!channel) return message.reply(`The Channel you specified doesn't exist in this Server!`);
             client.setups.set(message.guild.id, channel.id, "humans");
-            return message.reply(`✅ Succesfully set the **Humans** Member Count to <#${channel.id}>`)
+            return message.reply(`✅ Configure con éxito el ** humanos **. <#${channel.id}>`)
         }
 
         if(args[0] == "bots"){
             let channel = message.guild.channels.cache.get(args[1]);
-            if(!channel) return message.reply(`The Channel you specified doesn't exist in this Server!`);
+            if(!channel) return message.reply(`¡El canal que especificó no existe en este servidor!`);
             client.setups.set(message.guild.id, channel.id, "bots");
-            return message.reply(`✅ Succesfully set the **Bots** Member Count to <#${channel.id}>`)
+            return message.reply(`✅ Configure con éxito el miembro ** Boys **. <#${channel.id}>`)
         }
 
     }
@@ -83,7 +83,7 @@ setInterval(async () => {
                 totalchannel.setName(`Total: ${cachedguild.members.cache.size}`)
             } catch {}
             try {
-                humanschannel.setName(`Members: ${cachedguild.members.cache.filter(member => !member.user.bot).size}`)
+                humanschannel.setName(`Miembros: ${cachedguild.members.cache.filter(member => !member.user.bot).size}`)
             } catch {}
             try {
                 botschannel.setName(`Bots: ${cachedguild.members.cache.filter(member => member.user.bot).size}`)
@@ -94,9 +94,3 @@ setInterval(async () => {
 
     }
 }, 60 * 10000);
-
-/*
-CODED BY DEWSTOUH#1088
-7 JANUARY OF 2022
-MAKE SURE TO GIVE CREDITS WHEN USING THE CODE!
-*/
